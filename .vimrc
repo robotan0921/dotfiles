@@ -105,295 +105,80 @@ au QuickfixCmdPost grep copen
 
 "----------------------------------------------------------
 
-"---------------------------
-" Start Neobundle Settings.
-"---------------------------
+"----------------------------------------------------------
+" Vundle Settings.
+"----------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-if 0 | endif
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
- if has('vim_starting')
-   if &compatible
-     set nocompatible               " Be iMproved
-   endif
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" bundleで管理するディレクトリを指定
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
 
-endif
- 
-"Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
- 
-" neobundle自体をneobundleで管理
-NeoBundleFetch 'Shougo/neobundle.vim'
- 
-" 今後このあたりに追加のプラグインをどんどん書いて行きます！！"
-NeoBundle 'Shougo/vimproc.vim', {
-  \ 'build' : {
-    \ 'windows' : 'make -f make_mingw32.mak',
-    \ 'cygwin' : 'make -f make_cygwin.mak',
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-    \ },
-\ }
+Plugin 'scrooloose/nerdtree' " NERDTree: a file system explorer
+Plugin 'tomtom/tcomment_vim' "コメントアウト
+Plugin 'Townk/vim-autoclose'  " '()'の補完
+Plugin 'grep.vim' " Grep
+Plugin 'tpope/vim-endwise' " end certain structures automatically
+Plugin 'vim-latex/vim-latex' " vim-latex
+Plugin 'koron/codic-vim' " codic-vim
+Plugin 'ujihisa/neco-look'  " neco-look
+Plugin 'nathanaelkane/vim-indent-guides' " ネストを視覚化
+let g:indent_guides_enable_on_vim_startup = 1  " vim起動時に自動でvim-indent-guidesをオンにする
+
+" Colorschemes
+Plugin 'w0ng/vim-hybrid'
+Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'croaker/mustang-vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'flazz/vim-colorscheme'
+
+" Unite
+Plugin 'Shougo/unite.vim'
+Plugin 'ujihisa/unite-colorscheme'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 "
-"基本的なシンタックスのチェック
-"NeoBundle 'scrooloose/syntastic'
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-"補完"
-NeoBundle 'Shougo/neocomplete.vim'
-"NeoBundle 'Shougo/neocomplcashe'
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 "
-"--------------------------------------------------------------------------------------------"
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"----------------------------------------------------------
+" End of Vundle Settings.
+"----------------------------------------------------------
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-  \ 'default' : '',
-  \ 'vimshell' : $HOME.'/.vimshell_hist',
-  \ 'scheme' : $HOME.'/.gosh_completions'
-  \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "¥<C-y>" : "¥<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>¥<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. ¥t]->¥h¥w*¥|¥h¥w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *¥t]¥%(¥.¥|->¥)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *¥t]¥%(¥.¥|->¥)¥|¥h¥w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-"------------------------------------------------------------------------------------------------------
-
-
-
-"スニペット"
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-" -----------------------------------------------------------------------------------------------------
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
- 
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)"
-            \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)"
-            \: "\<TAB>"
- 
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-"-------------------------------------------------------------------------------------------------------
-
-"ユナイト"
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
-
-"c++言語補完"
-NeoBundle 'osyo-manga/vim-marching'
-
-" --------------------------------------------------------------------------------------------------------
-" clang コマンドの設定
-let g:marching_clang_command = "C:/clang.exe"
-
-" オプションを追加する
-" filetype=cpp に対して設定する場合
-let g:marching#clang_command#options = {
-            \   "cpp" : "-std=gnu++1y"
-            \}
-
-" インクルードディレクトリのパスを設定
-let g:marching_include_paths = [
-            \   "C:/MinGW/lib/gcc/mingw32/4.6.2/include/c++" ,
-            \   "C:/cpp/boost"
-            \]
-
-" neocomplete.vim と併用して使用する場合
-let g:marching_enable_neocomplete = 1
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-
-let g:neocomplete#force_omni_input_patterns.cpp =
-            \ '[^.[:digit:] *¥t]¥%(¥.¥|->¥)¥w*¥|¥h¥w*::¥w*'
-
-" 処理のタイミングを制御する
-" 短いほうがより早く補完ウィンドウが表示される
-" ただし、marching.vim 以外の処理にも影響するので注意する
-set updatetime=200
-
-" オムニ補完時に補完ワードを挿入したくない場合
-imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
-
-" キャッシュを削除してからオムに補完を行う
-imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
-
-
-" 非同期ではなくて、同期処理でコード補完を行う場合
-" この設定の場合は vimproc.vim に依存しない
-" let g:marching_backend = "sync_clang_command"
-"---------------------------------------------------------------------------------------------------------
-
-"colorscheme"hybrid"
-NeoBundle 'w0ng/vim-hybrid'
-
-"colorscheme"molokai"
-NeoBundle 'tomasr/molokai'
-
-"colorscheme"solarized
-NeoBundle 'altercation/vim-colors-solarized'
-"colorscheme"mustang
-NeoBundle 'croaker/mustang-vim'
-"colorscheme"jellybeans
-NeoBundle 'nanotech/jellybeans.vim'
-
-"colorscheme"いろいろ"
-NeoBundle 'flazz/vim-colorscheme'
-
-"NERDTreeを設定
-NeoBundle 'scrooloose/nerdtree' 
-
-"()を作ってくれるやつ
-NeoBundle 'Townk/vim-autoclose'
-
-"grep
-NeoBundle 'grep.vim'
-
-"ifとかの終了宣言を自動で挿入してくれるやつ
-NeoBundleLazy 'tpope/vim-endwise', {
- \  'autoload' : { 'insert' : 1,}}
-
-"vim-LaTeX
-NeoBundle 'vim-latex/vim-latex'
-
-"codic-vim
-NeoBundle 'koron/codic-vim'
-
-"neco-look"
-NeoBundle 'ujihisa/neco-look'
-
-"auto-ctags"
-NeoBundle 'soramugi/auto-ctags.vim'
-"let g:auto_ctags = 1
-"let g:auto_ctags_directory_list = ['/cygwin64/home/takuro']
-set tags+=/cygwin64/home/takuro/tags
-" tagsジャンプの時に複数ある時は一覧表示                                        
-nnoremap <C-]> g<C-]> 
-
-"--
-"markdown
-"--
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-""" markdown {{{
-  autocmd BufRead,BufNewFile *.mkd  set filetype=markdown
-  autocmd BufRead,BufNewFile *.md  set filetype=markdown
-  " Need: kannokanno/previm
-  nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
-  " 自動で折りたたまないようにする
-  let g:vim_markdown_folding_disabled=1
-  let g:previm_enable_realtime=1
-
-" }}}
-
-"function list
-NeoBundleLazy "majutsushi/tagbar", {
-      \ "autoload": { "commands": ["TagbarToggle"] }}
-if ! empty(neobundle#get("tagbar"))
-   " Width (default 40)
-  let g:tagbar_width = 20
-  " Map for toggle
-  nn <silent> <leader>t :TagbarToggle<CR>
-endif
-
-"コメントアウト
-NeoBundle 'tomtom/tcomment_vim'
-
-"ネストを視覚化{{{
-NeoBundle 'nathanaelkane/vim-indent-guides'
-" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
-let g:indent_guides_enable_on_vim_startup = 1
-
-" ファイル名で検索し、そのままVim上で開くことができるプラグイン
-NeoBundle 'ctrlpvim/ctrlp.vim'
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-"}}}
-call neobundle#end()
- 
-" Required:
-filetype plugin indent on
- 
-" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
-" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
-NeoBundleCheck
- 
-"-------------------------
-" End Neobundle Settings.
-"------------------------
-"
-"
 "-------------------------
 "Start vim-LaTeX Settings.
 "-------------------------
@@ -482,16 +267,16 @@ if !exists('g:neocomplete#text_mode_filetypes')
     let g:neocomplete#text_mode_filetypes = {}
 endif
 let g:neocomplete#text_mode_filetypes = {
-            \ 'rst': 1,
-            \ 'markdown': 1,
-            \ 'gitrebase': 1,
-            \ 'gitcommit': 1,
-            \ 'vcs-commit': 1,
-            \ 'hybrid': 1,
-            \ 'text': 1,
-            \ 'help': 1,
-            \ 'tex': 1,
-            \ }
+    \ 'rst': 1,
+    \ 'markdown': 1,
+    \ 'gitrebase': 1,
+    \ 'gitcommit': 1,
+    \ 'vcs-commit': 1,
+    \ 'hybrid': 1,
+    \ 'text': 1,
+    \ 'help': 1,
+    \ 'tex': 1,
+    \ }
 "-----------------------
 " end filetypeの設定
 "-----------------------
@@ -503,7 +288,6 @@ au BufRead,BufNewFile *.cdl set filetype=cdl
 
 
 "-----------------------
-"colorscheme の設定
+" Colorscheme Setting
 "-----------------------
 colorscheme jellybeans
-
