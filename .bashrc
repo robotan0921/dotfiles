@@ -11,6 +11,10 @@ alias ll='ls -1 --color -l'
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 #--function----------------------------------------
 function explorer_wrapper {
     explorer $2$(cygpath -w -a $1)
