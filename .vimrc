@@ -154,7 +154,7 @@ Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'croaker/mustang-vim'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'flazz/vim-colorscheme'
+Plugin 'flazz/vim-colorschemes'
 
 " Unite
 Plugin 'Shougo/unite.vim'

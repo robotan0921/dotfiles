@@ -22,12 +22,14 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  gitfast
   github
   gitignore
   emoji-clock
   emoji
   pod
   gem
+  react-native
   zsh-syntax-highlighting
   zsh-completions
 )
@@ -50,3 +52,10 @@ autoload -U compinit && compinit
 
 # Configure anyenv
 eval "$(anyenv init -)"
+
+# Configure Android Studio
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
