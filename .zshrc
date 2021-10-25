@@ -3,12 +3,12 @@
 export PATH="/usr/local/sbin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/takuro/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="refined" 
+ZSH_THEME="refined"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -21,15 +21,23 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  alias-finder
   git
   gitfast
   github
   gitignore
   emoji-clock
   emoji
+  adb
+  cp
   pod
   gem
+  npm
+  yarn
   react-native
+  brew
+  vscode
+  xcode
   zsh-syntax-highlighting
   zsh-completions
 )
@@ -47,7 +55,12 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Configure zsh-completions
-autoload -U compinit && compinit
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+fi
 
 
 # Configure anyenv
@@ -59,3 +72,9 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Configure Java
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_275`
+export PATH=$PATH:$JAVA_HOME/bin
+
+alias openurl='xcrun simctl openurl booted'
