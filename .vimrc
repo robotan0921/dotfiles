@@ -290,4 +290,4 @@ au BufRead,BufNewFile *.cdl set filetype=cdl
 "-----------------------
 " Colorscheme Setting
 "-----------------------
-colorscheme jellybeans
+colorscheme mojave
