@@ -2,23 +2,34 @@
 
 
 # ==================== Emojis ====================
-# 🎉  :tada:            初めてのコミット (Initial Commit)
-# 🔖  :bookmark:        バージョンタグ   (Version Tag)
-# ✨  :sparkles:        新機能           (New Feature)
-# 🐛  :bug:             バグ修正         (Bugfix)
+# 🎉  :tada:            初めてのコミット  (Initial Commit)
+# 🔖  :bookmark:        バージョンタグ (Version Tag)
+# ✨  :sparkles:        新機能  (New Feature)
+# 👍  :+1:              機能改善  (improvement)
+# 🐛  :bug:             バグ修正  (Bugfix)
 # ♻️   :recycle:         リファクタリング (Refactoring)
-# 📚  :books:           ドキュメント     (Documentation)
-# 🎨  :art:             デザインUI/UX    (Accessibility)
-# 🐎  :horse:           パフォーマンス   (Performance)
-# 🔧  :wrench:          ツール           (Tooling)
-# 🚨  :rotating_light:  テスト           (Tests)
-# 💩  :hankey:          非推奨追加       (Deprecation)
-# 🗑️  :wastebasket:     削除             (Removal)
-# 🚧  :construction:    WIP              (Work In Progress)
-
+# 📚  :books:           ドキュメント  (Documentation)
+# 🎨  :art:             デザインUI/UX (Accessibility)
+# 🚀  :rocket:          パフォーマンス (Performance)
+# 🆙  :up:              依存パッケージなどのアップデート  (Update)
+# 🔧  :wrench:          ツール (Tooling)
+# 🔍  :mag:             テスト (Tests)
+# 💩  :hankey:          非推奨追加 (Deprecation)
+# 🗑️  :wastebasket:     削除 (Removal)
+# 🚧  :construction:    WIP (Work In Progress)
 
 
 # ==================== Format ====================
 # :emoji: Subject
 #
 # Commit body...
+
+
+# =============== The Seven Rules ===============
+# 1. Separate subject from body with a blank line
+# 2. Limit the subject line to 50 characters
+# 3. Capitalize the subject line
+# 4. Do not end the subject line with a period
+# 5. Use the imperative mood in the subject line
+# 6. Wrap the body at 72 characters
+# 7. Use the body to explain what and why vs. how
